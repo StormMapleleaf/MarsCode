@@ -42,4 +42,11 @@ class UserController extends Controller
 
         return response()->json(['message' => '登录成功', 'user' => $user], 200);
     }
+
+    public function getAllUsers()
+    {
+        $users = User::all();
+        return response()->json(['users' => $users], 200);
+    }
+
 }

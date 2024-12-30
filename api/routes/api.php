@@ -23,16 +23,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // User routes
 Route::prefix('user')->group(function() {
-    Route::post('register', [UserController::class, 'register']);
-    Route::post('login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/users', [UserController::class, 'getAllUsers']);
 });
 
 // Product routes
 Route::prefix('product')->group(function() {
-    Route::post('create', [ProductController::class, 'create']);
-    Route::post('update', [ProductController::class, 'update']);
-    Route::post('delete', [ProductController::class, 'delete']);
-    Route::get('all', [ProductController::class, 'getAllProducts']);
-    Route::get('active', [ProductController::class, 'getActiveProducts']);
+    Route::post('/create', [ProductController::class, 'create']);
+    Route::post('/update', [ProductController::class, 'update']);
+    Route::post('/delete', [ProductController::class, 'delete']);
+    Route::post('/all', [ProductController::class, 'getAllProducts']);
+    Route::post('/active', [ProductController::class, 'getActiveProducts']);
 });
 // Feedback routes
+Route::prefix('feedback')->group(function() {
+    Route::post('/create', [FeedbackController::class, 'create']);
+    Route::post('/list', [FeedbackController::class, 'getProductFeedbacks']);
+
+});
