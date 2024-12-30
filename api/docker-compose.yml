@@ -17,9 +17,9 @@ services:
       - DB_CONNECTION=pgsql
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_DATABASE=laravel
-      - DB_USERNAME=laravel_user
-      - DB_PASSWORD=secret
+      - DB_DATABASE=postgres
+      - DB_USERNAME=hero
+      - DB_PASSWORD=123456
 
   nginx:
     image: nginx:alpine
@@ -38,9 +38,9 @@ services:
     image: postgres:latest
     container_name: laravel_db
     environment:
-      POSTGRES_DB: laravel
-      POSTGRES_USER: laravel_user
-      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: postgres
+      POSTGRES_USER: hero
+      POSTGRES_PASSWORD: 123456
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
