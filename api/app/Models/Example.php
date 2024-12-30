@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
-
-    protected $table = 'users';
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,11 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
-        'phone_number',
+        'name',
+        'email',
         'password',
-        'is_active',
-        'role',
     ];
 
     /**
@@ -32,6 +30,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'remember_token',
     ];
 
     /**
@@ -40,29 +39,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'is_active' => 'boolean',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'email_verified_at' => 'datetime',
     ];
-
-    /**
-     * Get the user's is_active status.
-     *
-     * @return bool
-     */
-    public function getIsActiveAttribute($value)
-    {
-        return $value == 1;
-    }
-
-    /**
-     * Set the user's is_active status.
-     *
-     * @param  bool  $value
-     * @return void
-     */
-    public function setIsActiveAttribute($value)
-    {
-        $this->attributes['is_active'] = $value ? 1 : 0;
-    }
 }

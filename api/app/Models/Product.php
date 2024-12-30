@@ -2,36 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Product extends Model
 {
-    use HasApiTokens, Notifiable;
-
-    protected $table = 'users';
-
+    protected $table = 'products';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
-        'phone_number',
-        'password',
+        'name',
+        'description',
+        'price',
         'is_active',
-        'role',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
+        'image_url',
     ];
 
     /**
@@ -40,13 +26,14 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'price' => 'decimal:2',
         'is_active' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
     /**
-     * Get the user's is_active status.
+     * Get the product's is_active status.
      *
      * @return bool
      */
@@ -56,7 +43,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set the user's is_active status.
+     * Set the product's is_active status.
      *
      * @param  bool  $value
      * @return void
