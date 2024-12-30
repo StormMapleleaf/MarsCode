@@ -22,10 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // User routes
-Route::apiResource('users', UserController::class);
+Route::prefix('user')->group(function() {
+    Route::post('register', [UserController::class, 'register']);
+    Route::post('login', [UserController::class, 'login']);
+});
 
 // Product routes
-Route::apiResource('products', ProductController::class);
-
+Route::prefix('product')->group(function() {
+    Route::post('create', [ProductController::class, 'create']);
+    Route::post('update', [ProductController::class, 'update']);
+    Route::post('delete', [ProductController::class, 'delete']);
+    Route::get('all', [ProductController::class, 'getAllProducts']);
+    Route::get('active', [ProductController::class, 'getActiveProducts']);
+});
 // Feedback routes
-Route::apiResource('feedback', FeedbackController::class);

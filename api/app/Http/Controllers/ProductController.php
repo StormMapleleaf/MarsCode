@@ -3,46 +3,62 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'is_active' => '1',
+            'image_url' => 'nullable|string',
+        ]);
+
+        $product = Product::create($validated);
+        return response()->json(['message' => '商品创建成功', 'product' => $product], 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'id' => 'required',
+            'name' => 'sometimes|required',
+            'description' => 'nullable|string',
+            'price' => 'sometimes|required|numeric',
+            'is_active' => 'boolean',
+            'image_url' => 'nullable|string',
+        ]);
+
+        $product = Product::findOrFail($validated['id']);
+
+        $product->update($validated);
+        return response()->json(['message' => '商品更新成功', 'product' => $product], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function delete(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'id' => 'required',
+        ]);
+        $product = Product::findOrFail($validated['id']);
+        $product->delete();
+
+        return response()->json(['message' => '商品删除成功'], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function getAllProducts()
     {
-        //
+        $products = Product::all();
+        return response()->json(['products' => $products], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function getActiveProducts()
     {
-        //
+        $products = Product::where('is_active', true)->get();
+        return response()->json(['products' => $products], 200);
     }
 }
+
