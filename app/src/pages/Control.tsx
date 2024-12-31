@@ -21,20 +21,25 @@ const Control = () => {
     useEffect(() => {
         if (user.role !== 'admin') {
             navigate('/home');
-        } else {
-            const fetchProducts = async () => {
-                const response = await getAllProducts();
-                setProducts(response.data.products);
-            };
-            fetchProducts();
         }
     }, [user, navigate]);
+
+    useEffect(() => {
+        if (selectedFunction === 'edit') {
+            handleEditProduct();
+        }
+    }, [selectedFunction]);
 
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
         const updatedProducts = [...products];
         updatedProducts[index][name] = value;
         setProducts(updatedProducts);
+    };
+
+    const handleEditProduct = async () => {
+        const response = await getAllProducts();
+        setProducts(response.data.products);
     };
 
     const handleUpdateProduct = async (index) => {
@@ -77,67 +82,67 @@ const Control = () => {
                 <button onClick={() => setSelectedFunction('edit')}>编辑商品信息</button>
             </div>
             {selectedFunction === 'edit' && (
-  <div>
-    <h2>编辑商品信息</h2>
-    <table className="product-table">
-      <thead>
-        <tr>
-          <th>商品名称</th>
-          <th>商品描述</th>
-          <th>商品价格</th>
-          <th>状态</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((product, index) => (
-          <tr key={product.id}>
-            <td>
-              <input
-                type="text"
-                name="name"
-                value={product.name}
-                onChange={(e) => handleInputChange(e, index)}
-                placeholder="商品名称"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                name="description"
-                value={product.description}
-                onChange={(e) => handleInputChange(e, index)}
-                placeholder="商品描述"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                name="price"
-                value={product.price}
-                onChange={(e) => handleInputChange(e, index)}
-                placeholder="商品价格"
-              />
-            </td>
-            <td>
-              <select
-                name="is_active"
-                value={product.is_active ? 1 : 0}
-                onChange={(e) => handleInputChange(e, index)}
-              >
-                <option value={1}>上架</option>
-                <option value={0}>下架</option>
-              </select>
-            </td>
-            <td>
-              <button onClick={() => handleUpdateProduct(index)}>更新商品</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
+                <div>
+                    <h2>编辑商品信息</h2>
+                    <table className="product-table">
+                    <thead>
+                        <tr>
+                        <th>商品名称</th>
+                        <th>商品描述</th>
+                        <th>商品价格</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products.map((product, index) => (
+                        <tr key={product.id}>
+                            <td>
+                            <input
+                                type="text"
+                                name="name"
+                                value={product.name}
+                                onChange={(e) => handleInputChange(e, index)}
+                                placeholder="商品名称"
+                            />
+                            </td>
+                            <td>
+                            <input
+                                type="text"
+                                name="description"
+                                value={product.description}
+                                onChange={(e) => handleInputChange(e, index)}
+                                placeholder="商品描述"
+                            />
+                            </td>
+                            <td>
+                            <input
+                                type="text"
+                                name="price"
+                                value={product.price}
+                                onChange={(e) => handleInputChange(e, index)}
+                                placeholder="商品价格"
+                            />
+                            </td>
+                            <td>
+                            <select
+                                name="is_active"
+                                value={product.is_active ? 1 : 0}
+                                onChange={(e) => handleInputChange(e, index)}
+                            >
+                                <option value={1}>上架</option>
+                                <option value={0}>下架</option>
+                            </select>
+                            </td>
+                            <td>
+                            <button onClick={() => handleUpdateProduct(index)}>更新商品</button>
+                            </td>
+                        </tr>
+                        ))}
+                    </tbody>
+                    </table>
+                </div>
+                )}
             {selectedFunction === 'add' && (
                 <div>
                     <h2>添加新商品</h2>
