@@ -2,9 +2,17 @@
 import React from 'react';
 import NavBar from '../components/NavBar.tsx';
 import './User.css';
+import { useNavigate } from 'react-router-dom';
 
 const User: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
 
   return (
     <div className="user-page">
@@ -21,6 +29,7 @@ const User: React.FC = () => {
             <p>{user.role === 'admin' ? '管理员' : '会员'}</p>
             {/* 这里可以添加更多用户信息 */}
           </div>
+          <button onClick={handleLogout}>退出登录</button>
         </div>
       </div>
     </div>

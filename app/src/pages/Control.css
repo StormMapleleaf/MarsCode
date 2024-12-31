@@ -9,6 +9,8 @@
 
 .function-menu {
   margin-bottom: 20px;
+  display: flex; /* 添加这行 */
+  justify-content: center; /* 添加这行 */
 }
 
 h2 {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllProducts, createProduct, updateProduct } from '../api/api.tsx';
 import './Control.css';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar.tsx';
 
 const Control = () => {
@@ -15,14 +16,19 @@ const Control = () => {
     const [selectedFunction, setSelectedFunction] = useState('');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const [selectedImage, setSelectedImage] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const response = await getAllProducts();
-            setProducts(response.data.products);
-        };
-        fetchProducts();
-    }, []);
+        if (user.role !== 'admin') {
+            navigate('/home');
+        } else {
+            const fetchProducts = async () => {
+                const response = await getAllProducts();
+                setProducts(response.data.products);
+            };
+            fetchProducts();
+        }
+    }, [user, navigate]);
 
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
