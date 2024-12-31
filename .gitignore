@@ -6,6 +6,7 @@ Homestead.yaml
 .phpunit.result.cache
 api/storage/cert
 api/storage/logs
+.vscode
 
 api/nginx
 api/postgres
