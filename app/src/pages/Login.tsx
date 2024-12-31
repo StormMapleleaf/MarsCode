@@ -60,7 +60,12 @@ const Login = () => {
             const response = await loginUser({ phone_number: phoneNumber, password });
             const user = response.data.user;
             // 你可以将用户信息存储在 localStorage 或者 context 中
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify({
+                id: user.id,
+                name: user.username,
+                phone_number: user.phone_number,
+                role: user.role
+            }));
             // 重定向到主页或其他页面
             navigate('/home');
         } catch (err) {

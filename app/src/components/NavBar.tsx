@@ -14,6 +14,7 @@ const NavBar: React.FC<NavBarProps> = ({ username }) => {
         <span className="logo-text gradient-text">MarsCode</span>
       </div>
       <div className="navbar-menu">
+        <Link to="/home" className="navbar-item">首页</Link>
         <Link to="/user" className="navbar-item">个人信息</Link>
         <span className="navbar-item username">{username}</span>
       </div>

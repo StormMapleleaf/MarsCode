@@ -47,10 +47,12 @@
   }
   
 
-.navbar-menu {
-  display: flex;
-  align-items: center;
-}
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
 
 .navbar-item {
   margin-left: 20px;

@@ -1,27 +1,28 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import NavBar from '../components/NavBar.tsx';
+import React, { useEffect, useState } from 'react';
+import { getActiveProducts } from '../api/api.tsx';
+import ProductsDetail from '../components/ProductsDetail.tsx';
 import './Home.css';
 
-const Home: React.FC = () => {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
+const Home = () => {
+    const [products, setProducts] = useState([]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const response = await getActiveProducts();
+            setProducts(response.data.products);
+        };
+        fetchProducts();
+    }, []);
 
-  return (
-    <div className="home-page">
-      <NavBar username={user.name || '用户'} />
-      <div className="home-content">
-        <h1>欢迎回来，{user.name || '用户'}！</h1>
-        <p>这是您的个人主页。</p>
-        <button onClick={handleLogout}>登出</button>
-      </div>
-    </div>
-  );
+    return (
+        <div className="home-page">
+            <div className="products-grid">
+                {products.map((product) => (
+                    <ProductsDetail product={product}  />
+                ))}
+            </div>
+        </div>
+    );
 };
 
 export default Home;
