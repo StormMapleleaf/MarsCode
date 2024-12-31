@@ -17,7 +17,11 @@ const Control = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const [selectedImage, setSelectedImage] = useState(null);
     const navigate = useNavigate();
-
+    useEffect(() => {
+                if (!user.id) {
+                    navigate('/login');
+                }
+            }, [user, navigate]);
     useEffect(() => {
         if (user.role !== 'admin') {
             navigate('/home');

@@ -1,5 +1,5 @@
 // FILEPATH: d:/github/marscode/app/src/pages/User.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar.tsx';
 import './User.css';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,11 @@ import { useNavigate } from 'react-router-dom';
 const User: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const navigate = useNavigate();
-
+      useEffect(() => {
+              if (!user.id) {
+                  navigate('/login');
+              }
+          }, [user, navigate]);
   const handleLogout = () => {
     localStorage.removeItem('user');
     navigate('/login');
