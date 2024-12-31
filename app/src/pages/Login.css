@@ -83,6 +83,36 @@
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.5);
 }
 
+.login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+.brand-name {
+    font-size: 4rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.brand-name span {
+    display: inline-block;
+    animation: bounce 0.8s ease infinite alternate;
+    animation-delay: var(--delay);
+}
+@keyframes bounce {
+    to {
+        transform: translateY(-3px);
+    }
+}
+
 .login-container button {
     background: linear-gradient(45deg, #1890ff, #40a9ff);
     color: white;
@@ -120,4 +150,84 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 300px;
+}
+
+/* 在文件末尾添加以下样式 */
+
+.register-button {
+    background: linear-gradient(45deg, #52c41a, #73d13d);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+.register-button:hover {
+    background: linear-gradient(45deg, #73d13d, #95de64);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(82, 196, 26, 0.3);
+}
+
+/* 修改注册模态框样式 */
+.register-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    padding: 0;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px; /* 增加最大宽度 */
+    margin-left: -35px;
+}
+
+
+
+/* 取消按钮样式 */
+.cancel-button {
+    background: linear-gradient(45deg, #ff4d4f, #ff7875);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+.cancel-button:hover {
+    background: linear-gradient(45deg, #ff7875, #ffa39e);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+.register-modal .login-container {
+    width: 100%;
+    max-width: 100%; /* 确保容器占满模态框 */
+}
+
+.register-modal .login-container form div {
+    width: 100%;
+    max-width: 100%; /* 移除最大宽度限制 */
+}
+
+.register-modal .login-container input {
+    width: 100%;
+    max-width: 95%; /* 移除最大宽度限制 */
+}
+
+.register-modal .login-container button {
+    width: 100%;
+    max-width: 100%; /* 移除最大宽度限制 */
 }

@@ -1,0 +1,13 @@
+.user-page {
+    padding-top: 60px; /* 为固定的导航栏留出空间 */
+  }
+  
+  .user-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333;
+  }

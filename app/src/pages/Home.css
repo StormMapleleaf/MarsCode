@@ -1,0 +1,10 @@
+.home-page, .user-page {
+    padding-top: 60px; /* 为固定的导航栏留出空间 */
+  }
+  
+  .home-content, .user-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
