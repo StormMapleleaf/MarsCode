@@ -17,7 +17,19 @@ export const getAllUsers = async () => {
 
 // 商品相关API
 export const createProduct = async (productData) => {
-    return axios.post(`${API_BASE_URL}/product/create`, productData);
+    const formData = new FormData();
+    formData.append('name', productData.name);
+    formData.append('description', productData.description);
+    formData.append('price', productData.price);
+    formData.append('is_active', productData.is_active);
+    if (productData.image) {
+        formData.append('image', productData.image);
+    }
+    return axios.post(`${API_BASE_URL}/product/create`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 };
 
 export const updateProduct = async (productData) => {
@@ -35,6 +47,7 @@ export const getAllProducts = async () => {
 export const getActiveProducts = async () => {
     return axios.post(`${API_BASE_URL}/product/active`);
 };
+
 
 // 反馈相关API
 export const createFeedback = async (feedbackData) => {

@@ -6,6 +6,7 @@ import './index.css';
 import Login from './pages/Login.tsx';
 import Home from './pages/Home.tsx';
 import User from './pages/User.tsx';
+import Control from './pages/Control.tsx';
 
 const handleLogin = (username: string, password: string) => {
   // 在这里处理登录逻辑
@@ -22,7 +23,7 @@ root.render(
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/user" element={<User />} />
-        
+        <Route path="/control" element={<Control />} /> 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>

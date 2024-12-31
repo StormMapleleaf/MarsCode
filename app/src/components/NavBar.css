@@ -29,7 +29,7 @@
   }
   
   .navbar-brand {
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: bold;
     letter-spacing: 1px;
   }
@@ -60,6 +60,7 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  font-size: 1.3rem; 
 }
 
 .navbar-item:hover {
@@ -68,8 +69,16 @@
 
 .username {
   font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3); /* 增加不透明度以提高高亮效果 */
   padding: 5px 10px;
   border-radius: 15px;
   color: #ffffff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3); /* 添加文字阴影以增加可读性 */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* 添加发光效果 */
+  transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+.username:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* 悬停时增加高亮效果 */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* 悬停时增强发光效果 */
 }
